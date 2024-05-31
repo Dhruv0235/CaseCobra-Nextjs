@@ -9,7 +9,7 @@ import { Configuration } from "@prisma/client";
 import { ArrowRight, Check } from "lucide-react";
 import { useEffect, useState } from "react";
 import Confetti from "react-dom-confetti";
-import { createOrderId } from "./actions";
+import { createOrderId, verifyOrder } from "./actions";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
@@ -91,16 +91,10 @@ export default function DesignPreview({
             orderIdDB: orderId.orderIdDB,
             cookieValue,
           };
+          console.log("Data is", data);
 
-          const result = await fetch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/verify`,
-            {
-              method: "POST",
-              body: JSON.stringify(data),
-              headers: { "Content-Type": "application/json" },
-            }
-          );
-          const res = await result.json();
+          const res = await verifyOrder(data);
+
           if (res.isOk) {
             router.push(
               `${process.env.NEXT_PUBLIC_SERVER_URL}/thank-you?orderId=${orderId.orderIdDB}`
@@ -131,6 +125,7 @@ export default function DesignPreview({
       });
       paymentObject.open();
     } catch (error) {
+      console.error(error);
       toast({
         title: "Payment Failed",
         description: "There was an issue on our side. Please try again",
