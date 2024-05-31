@@ -5,6 +5,7 @@ import { getPaymentStatus } from "./actions";
 import { useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import PhonePreview from "@/components/PhonePreview";
+import { formatPrice } from "@/lib/utils";
 
 export default function ThankYou() {
   const searchParams = useSearchParams();
@@ -73,7 +74,73 @@ export default function ThankYou() {
           </div>
         </div>
         <div className="flex space-x-6 overflow-hidden mt-4 rounded-xl bg-gray-900/5 ring-1 ring-inset ring-gray-900/10 lg:rounded-2xl">
-          <PhonePreview />
+          <PhonePreview
+            croppedImageUrl={configuration.croppedImageUrl!}
+            color={color!}
+          />
+        </div>
+
+        <div>
+          <div className="grid grid-cols-2 gap-x-6 py-10 text-sm ">
+            <div>
+              <p className="font-medium text-gray-900">Shipping Address</p>
+              <div className="mt-2 text-zinc-700">
+                <address className="not-italic">
+                  <span className="block">{shippingAddress?.name}</span>
+                  <span className="block">{shippingAddress?.street},</span>
+                  <span className="block">
+                    {shippingAddress?.city}-{shippingAddress?.postalCode},
+                  </span>
+                  <span className="block">
+                    {shippingAddress?.state}, {shippingAddress?.country}
+                  </span>
+                </address>
+              </div>
+            </div>
+
+            <div>
+              <p className="font-medium text-gray-900">Billing Address</p>
+              <div className="mt-2 text-zinc-700">
+                <address className="not-italic">
+                  <span className="block">{billingAddress?.name}</span>
+                  <span className="block">{billingAddress?.street},</span>
+                  <span className="block">
+                    {billingAddress?.city}-{billingAddress?.postalCode},
+                  </span>
+                  <span className="block">
+                    {billingAddress?.state} {billingAddress?.country}
+                  </span>
+                </address>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-x-6 border-t border-zinc-200 py-10 text-sm">
+            <div>
+              <p className="font-medium text-zinc-900">Payment Status</p>
+              <p className="mt-2 text-zinc-700">Paid</p>
+            </div>
+
+            <div>
+              <p className="font-medium text-zinc-900">Shipping Method</p>
+              <p className="mt-2 text-zinc-700">
+                You will receive your order in 3 working days
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="space-y-6 border-t border-zinc-200 pt-10 text-sm">
+          <div className="flex justify-between">
+            <p className="font-medium text-zinc-900">Subtotal</p>
+            <p className="font-medium text-zinc-700">{formatPrice(amount)}</p>
+          </div>
+          <div className="flex justify-between">
+            <p className="font-medium text-zinc-900">Shipping</p>
+            <p className="font-medium text-zinc-700">{formatPrice(0)}</p>
+          </div>
+          <div className="flex justify-between">
+            <p className="font-medium text-zinc-900">Total</p>
+            <p className="font-medium text-zinc-700">{formatPrice(amount)}</p>
+          </div>
         </div>
       </div>
     </div>
