@@ -150,16 +150,19 @@ export const createOrderId = async (configId: string) => {
   console.log(order.id);
 
   try {
-    const response = await fetch("http://localhost:3000/api/order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        amount: "" + price,
-        currency: "INR",
-      }),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/order`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: "" + price,
+          currency: "INR",
+        }),
+      }
+    );
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }

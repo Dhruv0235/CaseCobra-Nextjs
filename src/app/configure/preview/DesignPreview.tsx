@@ -92,11 +92,14 @@ export default function DesignPreview({
             cookieValue,
           };
 
-          const result = await fetch("http://localhost:3000/api/verify", {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: { "Content-Type": "application/json" },
-          });
+          const result = await fetch(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/verify`,
+            {
+              method: "POST",
+              body: JSON.stringify(data),
+              headers: { "Content-Type": "application/json" },
+            }
+          );
           const res = await result.json();
           if (res.isOk) {
             router.push(
