@@ -17,9 +17,11 @@ import Cookies from "js-cookie";
 export default function AddressModal({
   isOpen,
   setIsOpen,
+  toggle,
 }: {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  toggle: () => void;
 }) {
   const [initialValues, setInitialValues] = useState({
     name: "",
@@ -32,16 +34,18 @@ export default function AddressModal({
   });
 
   useEffect(() => {
-    const cookieValue = Cookies.get("address");
-    if (cookieValue) {
-      try {
-        const parsedValue = JSON.parse(cookieValue);
-        setInitialValues(parsedValue);
-      } catch (error) {
-        console.error("Error parsing cookie value:", error);
+    if (isOpen) {
+      const cookieValue = Cookies.get("address");
+      if (cookieValue) {
+        try {
+          const parsedValue = JSON.parse(cookieValue);
+          setInitialValues(parsedValue);
+        } catch (error) {
+          console.error("Error parsing cookie value:", error);
+        }
       }
     }
-  }, []);
+  }, [isOpen]);
 
   return (
     <Dialog onOpenChange={setIsOpen} open={isOpen}>
@@ -94,7 +98,7 @@ export default function AddressModal({
                 expires: 7,
                 path: "/",
               });
-
+              toggle();
               setIsOpen(false);
               resetForm();
               setSubmitting(false);
