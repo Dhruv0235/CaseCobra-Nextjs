@@ -9,14 +9,14 @@ const Navbar = async () => {
   const user = await getUser();
   const isAdmin = user?.email === process.env.ADMIN_EMAIL;
   return (
-    <nav className="sticky z-[100] h-14 inset-x-0 top-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
+    <nav className="sticky inset-x-0 top-0 z-[100] h-14 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
       <MaxWidthWrapper>
         <div className="flex h-14 items-center justify-between border-b border-zinc-200">
-          <Link href="/" className="flex z-40 font-semibold">
+          <Link href="/" className="z-40 flex font-semibold">
             case<span className="text-green-600">cobra</span>
           </Link>
 
-          <div className="h-full flex items-center space-x-4">
+          <div className="flex h-full items-center space-x-4">
             {user ? (
               <>
                 <Link
@@ -43,7 +43,7 @@ const Navbar = async () => {
                   href="/configure/upload"
                   className={buttonVariants({
                     size: "sm",
-                    className: "hidden sm:flex items-center gap-1",
+                    className: "hidden items-center gap-1 sm:flex",
                   })}
                 >
                   Create case
@@ -72,12 +72,12 @@ const Navbar = async () => {
                   Login
                 </Link>
 
-                <div className="h-8 w-px bg-zinc-200 hidden sm:block"></div>
+                <div className="hidden h-8 w-px bg-zinc-200 sm:block"></div>
                 <Link
                   href="/configure/upload"
                   className={buttonVariants({
                     size: "sm",
-                    className: "hidden sm:flex items-center gap-1",
+                    className: "hidden items-center gap-1 sm:flex",
                   })}
                 >
                   Create case

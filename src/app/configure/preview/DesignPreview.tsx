@@ -63,11 +63,11 @@ export default function DesignPreview({
 
   const { color, model, finish, material } = configuration;
   const tw = COLORS.find(
-    (supportedcolor) => supportedcolor.value === color
+    (supportedcolor) => supportedcolor.value === color,
   )?.tw;
 
   const { label: modelLabel } = MODELS.options.find(
-    ({ value }) => value === model
+    ({ value }) => value === model,
   )!;
 
   let totalPrice = BASE_PRICE;
@@ -106,7 +106,7 @@ export default function DesignPreview({
             setLoadingState(true);
             setTimeout(() => {
               router.push(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/thank-you?orderId=${orderId.orderIdDB}`
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/thank-you?orderId=${orderId.orderIdDB}`,
               );
             }, 3000);
 
@@ -117,7 +117,7 @@ export default function DesignPreview({
             });
           } else {
             router.push(
-              `${process.env.NEXT_PUBLIC_SERVER_URL}/configure/preview?id=${configuration.id}`
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/configure/preview?id=${configuration.id}`,
             );
           }
         },
@@ -170,7 +170,7 @@ export default function DesignPreview({
         <>
           <div
             aria-hidden="true"
-            className="pointer-events-none select-none absolute inset-0 overflow-hidden flex justify-center"
+            className="pointer-events-none absolute inset-0 flex select-none justify-center overflow-hidden"
           >
             <Confetti
               active={showConfetti}
@@ -188,14 +188,14 @@ export default function DesignPreview({
             toggle={toggle}
           />
 
-          <div className="mt-20 flex flex-col items-center md:grid text-sm sm:grid-cols-12 sm:grid-rows-1 sm:gap-x-6 md:gap-x-8 lg:gap-x-12">
-            <div className="md:col-span-4 lg:col-span-3 md:row-span-2 md:row-end-2">
+          <div className="mt-20 flex flex-col items-center text-sm sm:grid-cols-12 sm:grid-rows-1 sm:gap-x-6 md:grid md:gap-x-8 lg:gap-x-12">
+            <div className="md:col-span-4 md:row-span-2 md:row-end-2 lg:col-span-3">
               <Phone
                 className={cn("max-w-[150px] md:max-w-full", `bg-${tw}`)}
                 imgSrc={configuration.croppedImageUrl!}
               />
             </div>
-            <div className="mt-6 sm:col-span-9 sm:mt-0 md:row-end-1 ">
+            <div className="mt-6 sm:col-span-9 sm:mt-0 md:row-end-1">
               <h3 className="text-3xl font-bold tracking-tight text-gray-900">
                 Your {modelLabel} Case
               </h3>
@@ -204,11 +204,11 @@ export default function DesignPreview({
                 In stock and ready to ship
               </div>
             </div>
-            <div className="sm:col-span-12 md:col-span-9 text-base">
+            <div className="text-base sm:col-span-12 md:col-span-9">
               <div className="grid grid-cols-1 gap-y-8 border-b border-gray-200 py-8 sm:grid-cols-2 sm:gap-x-6 sm:py-6 md:py-10">
                 <div>
                   <p className="font-medium text-zinc-950">Highlights</p>
-                  <ol className="mt-3 text-zinc-700 list-disc list-inside">
+                  <ol className="mt-3 list-inside list-disc text-zinc-700">
                     <li>Wireless Charging compatible</li>
                     <li>TPU shock absorption</li>
                     <li>Packaging made from recycled materials</li>
@@ -217,16 +217,16 @@ export default function DesignPreview({
                 </div>
                 <div>
                   <p className="font-medium text-zinc-950">Materials</p>
-                  <ol className="mt-3 text-zinc-700 list-disc list-inside">
+                  <ol className="mt-3 list-inside list-disc text-zinc-700">
                     <li>High Quality, durable material</li>
                     <li>Scratch and fingerprint resistant coating</li>
                   </ol>
                 </div>
               </div>
-              <div className="mt-8 ">
+              <div className="mt-8">
                 <div className="bg-gray-50 p-6 sm:rounded-lg sm:p-8">
                   <div className="flow-root text-sm">
-                    <div className="flex items-center justify-between py-1 mt-2">
+                    <div className="mt-2 flex items-center justify-between py-1">
                       <p className="text-gray-600">Base Price</p>
                       <p className="font-medium text-gray-900">
                         {formatPrice(BASE_PRICE / 100)}
@@ -234,7 +234,7 @@ export default function DesignPreview({
                     </div>
 
                     {finish === "textured" ? (
-                      <div className="flex items-center justify-between py-1 mt-2">
+                      <div className="mt-2 flex items-center justify-between py-1">
                         <p className="text-gray-600">Textured Finish</p>
                         <p className="font-medium text-gray-900">
                           {formatPrice(PRODUCT_PRICES.finish.textured / 100)}
@@ -243,13 +243,13 @@ export default function DesignPreview({
                     ) : null}
 
                     {material === "polycarbonate" ? (
-                      <div className="flex items-center justify-between py-1 mt-2">
+                      <div className="mt-2 flex items-center justify-between py-1">
                         <p className="text-gray-600">
                           Soft polycarbonate material
                         </p>
                         <p className="font-medium text-gray-900">
                           {formatPrice(
-                            PRODUCT_PRICES.material.polycarbonate / 100
+                            PRODUCT_PRICES.material.polycarbonate / 100,
                           )}
                         </p>
                       </div>
@@ -264,17 +264,17 @@ export default function DesignPreview({
                     </div>
                   </div>
                 </div>
-                <div className="mt-8 flex justify-end pb-12 gap-4">
+                <div className="mt-8 flex justify-end gap-4 pb-12">
                   {addressEntered ? (
                     <Button
-                      className="px-4 sm:px-6 lg:px-8 bg-zinc-700"
+                      className="bg-zinc-700 px-4 sm:px-6 lg:px-8"
                       onClick={() => setIsAddressModalOpen(true)}
                     >
                       Edit Delivery Address
                     </Button>
                   ) : (
                     <Button
-                      className="px-4 sm:px-6 lg:px-8 bg-zinc-700"
+                      className="bg-zinc-700 px-4 sm:px-6 lg:px-8"
                       onClick={() => setIsAddressModalOpen(true)}
                     >
                       Add Delivery Address
@@ -285,7 +285,7 @@ export default function DesignPreview({
                     className="px-4 sm:px-6 lg:px-8"
                     onClick={() => handleCheckOut()}
                   >
-                    Check out <ArrowRight className="h-4 w-4 ml-1.5 inline" />
+                    Check out <ArrowRight className="ml-1.5 inline h-4 w-4" />
                   </Button>
                 </div>
               </div>

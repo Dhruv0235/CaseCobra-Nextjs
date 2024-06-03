@@ -31,7 +31,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 export interface ButtonProps
@@ -54,7 +54,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       asChild = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     const Comp = asChild ? Slot : "button";
     return (
@@ -66,14 +66,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {isLoading && loadingText ? loadingText : children}
         {isLoading ? (
           <span className="ml-1.5 flex items-center gap-1">
-            <span className="animate-flashing w-1 h-1 bg-white rouded-full inline-block" />
-            <span className="animate-flashing delay-100 w-1 h-1 bg-white rouded-full inline-block" />
-            <span className="animate-flashing delay-200 w-1 h-1 bg-white rouded-full inline-block" />
+            <span className="rouded-full inline-block h-1 w-1 animate-flashing bg-white" />
+            <span className="rouded-full inline-block h-1 w-1 animate-flashing bg-white delay-100" />
+            <span className="rouded-full inline-block h-1 w-1 animate-flashing bg-white delay-200" />
           </span>
         ) : null}
       </Comp>
     );
-  }
+  },
 );
 Button.displayName = "Button";
 

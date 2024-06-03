@@ -21,7 +21,7 @@ export default function LoginModal({
     <Dialog onOpenChange={setIsOpen} open={isOpen}>
       <DialogContent className="absolute z-[9999999]">
         <DialogHeader>
-          <div className="relative mx-auto w-24 h-24 mb-2">
+          <div className="relative mx-auto mb-2 h-24 w-24">
             <Image
               fill
               src="/snake-1.png"
@@ -29,10 +29,10 @@ export default function LoginModal({
               className="object-contain"
             />
           </div>
-          <DialogTitle className="text-3xl text-center font-bold tracking-tight text-gray-900">
+          <DialogTitle className="text-center text-3xl font-bold tracking-tight text-gray-900">
             Log in to continue
           </DialogTitle>
-          <DialogDescription className="text-base text-center py-2">
+          <DialogDescription className="py-2 text-center text-base">
             <span className="font-medium text-zinc-900">
               Your configuration was saved!
             </span>{" "}

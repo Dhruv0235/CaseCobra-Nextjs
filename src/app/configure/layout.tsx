@@ -9,7 +9,7 @@ export default function UplaoadLayout({
 }) {
   return (
     <>
-      <MaxWidthWrapper className="flex-1 flex flex-col">
+      <MaxWidthWrapper className="flex flex-1 flex-col">
         <Steps />
         {children}
       </MaxWidthWrapper>

@@ -51,18 +51,18 @@ export default function PhonePreview({
         <img
           width={renderedDimensions.width / (3000 / 637)}
           className={cn(
-            "phone-skew relative rounded-t-[15px] rounded-b-[10px] md:rounded-t-[30px] md:rounded-b-[20px]",
-            caseBackgroundColor
+            "phone-skew relative rounded-b-[10px] rounded-t-[15px] md:rounded-b-[20px] md:rounded-t-[30px]",
+            caseBackgroundColor,
           )}
           src={croppedImageUrl}
         />
       </div>
 
-      <div className="relative h-full w-full z-40">
+      <div className="relative z-40 h-full w-full">
         <img
           alt="phone"
           src="/clearphone.png"
-          className="pointer-events-none w-full h-full antialiased rounded-md"
+          className="pointer-events-none h-full w-full rounded-md antialiased"
         />
       </div>
     </AspectRatio>

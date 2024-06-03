@@ -129,7 +129,7 @@ export default function DesignConfigurator({
         actualX,
         actualY,
         renderedDimension.width,
-        renderedDimension.height
+        renderedDimension.height,
       );
 
       const base64 = canvas.toDataURL();
@@ -159,12 +159,12 @@ export default function DesignConfigurator({
   }
 
   return (
-    <div className="relative mt-20 grid grid-cols-1 lg:grid-cols-3 mb-20 pb-20">
+    <div className="relative mb-20 mt-20 grid grid-cols-1 pb-20 lg:grid-cols-3">
       <div
         ref={containerRef}
-        className="relative h-[37.5rem] overflow-hidden col-span-2 w-full max-w-4xl flex items-center justify-center rounded-lg border-2 border-dashed border-gray-300 p-12 text-center focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        className="relative col-span-2 flex h-[37.5rem] w-full max-w-4xl items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-gray-300 p-12 text-center focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
       >
-        <div className="relative w-60 bg-opacity-50 pointer-events-none aspect-[896/1831]">
+        <div className="pointer-events-none relative aspect-[896/1831] w-60 bg-opacity-50">
           <AspectRatio
             ratio={896 / 1831}
             className="pointer-events-none relative z-50 aspect-[896/1831] w-full"
@@ -177,11 +177,11 @@ export default function DesignConfigurator({
               className="pointer-events-none z-50 select-none"
             />
           </AspectRatio>
-          <div className="absolute z-40 inset-0 left-[3px] top-px right-[3px] bottom-px rounded-[32px] shadow-[0_0_0_99999px_rgba(229,231,235,0.6)]" />
+          <div className="absolute inset-0 bottom-px left-[3px] right-[3px] top-px z-40 rounded-[32px] shadow-[0_0_0_99999px_rgba(229,231,235,0.6)]" />
           <div
             className={cn(
-              "absolute inset-0 left-[3px] top-px right-[3px] bottom-px rounded-[32px]",
-              `bg-${options.color.tw}`
+              "absolute inset-0 bottom-px left-[3px] right-[3px] top-px rounded-[32px]",
+              `bg-${options.color.tw}`,
             )}
           />
         </div>
@@ -213,7 +213,7 @@ export default function DesignConfigurator({
             topLeft: <HandleComponent />,
           }}
         >
-          <div className="relative w-full h-full">
+          <div className="relative h-full w-full">
             <NextImage
               src={imageUrl}
               fill
@@ -224,20 +224,20 @@ export default function DesignConfigurator({
         </Rnd>
       </div>
 
-      <div className="h-[37.5rem] w-full col-span-full lg:col-span-1 flex flex-col bg-white">
+      <div className="col-span-full flex h-[37.5rem] w-full flex-col bg-white lg:col-span-1">
         <ScrollArea className="relative flex-1 overflow-auto">
           <div
             aria-hidden="true"
-            className="absolute z-10 inset-x-0 bottom-0 h-12 bg-gradient-to-t from-white pointer-events-none"
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-12 bg-gradient-to-t from-white"
           />
 
           <div className="px-8 pb-12 pt-8">
-            <h2 className="tracking-tight font-bold text-3xl">
+            <h2 className="text-3xl font-bold tracking-tight">
               Customize your case
             </h2>
 
-            <div className="w-full h-px bg-zinc-200 my-6 " />
-            <div className="relative mt-4 h-full flex flex-col justify-between">
+            <div className="my-6 h-px w-full bg-zinc-200" />
+            <div className="relative mt-4 flex h-full flex-col justify-between">
               <div className="flex flex-col gap-6">
                 <RadioGroup
                   value={options.color}
@@ -256,16 +256,16 @@ export default function DesignConfigurator({
                           key={color.label}
                           value={color}
                           className={cn(
-                            "relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-[0.15rem] active:ring-0 focus:ring-0 active:outline-none focus:outline-none border-2 border-transparent",
+                            "relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full border-2 border-transparent p-[0.15rem] focus:outline-none focus:ring-0 active:outline-none active:ring-0",
                             {
                               [`border-${color.tw}`]: options.color === color,
-                            }
+                            },
                           )}
                         >
                           <span
                             className={cn(
                               `bg-${color.tw}`,
-                              "h-8 w-8 rounded-full border border-black border-opacity-10"
+                              "h-8 w-8 rounded-full border border-black border-opacity-10",
                             )}
                           />
                         </Radio>
@@ -274,7 +274,7 @@ export default function DesignConfigurator({
                   </div>
                 </RadioGroup>
 
-                <div className="relative flex flex-col gap-3 w-full">
+                <div className="relative flex w-full flex-col gap-3">
                   <Label>Model</Label>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -292,11 +292,11 @@ export default function DesignConfigurator({
                         <DropdownMenuItem
                           key={model.label}
                           className={cn(
-                            "flex text-sm gap-1 items-center p-1.5 cursor-default hover:bg-zinc-100",
+                            "flex cursor-default items-center gap-1 p-1.5 text-sm hover:bg-zinc-100",
                             {
                               "bg-zinc-100":
                                 options.model.label === model.label,
-                            }
+                            },
                           )}
                           onClick={() =>
                             setOptions((prev) => ({
@@ -310,7 +310,7 @@ export default function DesignConfigurator({
                               "mr-2 h-4 w-4",
                               model.label === options.model.label
                                 ? "opacity-100"
-                                : "opacity-0"
+                                : "opacity-0",
                             )}
                           />
                           {model.label}
@@ -338,12 +338,12 @@ export default function DesignConfigurator({
                               key={option.value}
                               value={option}
                               className={cn(
-                                "relative block cursor-pointer rounded-lg bg-white px-6 py-4 shadow-sm border-2 border-zinc-200 focus:outline-none ring-0 focus:ring-0 outline-none sm:flex sm:justify-between",
+                                "relative block cursor-pointer rounded-lg border-2 border-zinc-200 bg-white px-6 py-4 shadow-sm outline-none ring-0 focus:outline-none focus:ring-0 sm:flex sm:justify-between",
                                 {
                                   "border-primary":
                                     options.material.label === option.label ||
                                     options.finish.label === option.label,
-                                }
+                                },
                               )}
                             >
                               <span className="flex items-center">
@@ -381,21 +381,21 @@ export default function DesignConfigurator({
                         ))}
                       </div>
                     </RadioGroup>
-                  )
+                  ),
                 )}
               </div>
             </div>
           </div>
         </ScrollArea>
 
-        <div className="w-full px-8 h-16 bg-white">
+        <div className="h-16 w-full bg-white px-8">
           <div className="h-px w-full bg-zinc-200" />
-          <div className="w-full h-full flex justify-end items-center">
-            <div className="w-full flex gap-6 items-center">
-              <p className="font-medium whitespace-nowrap">
+          <div className="flex h-full w-full items-center justify-end">
+            <div className="flex w-full items-center gap-6">
+              <p className="whitespace-nowrap font-medium">
                 {formatPrice(
                   (BASE_PRICE + options.finish.price + options.material.price) /
-                    100
+                    100,
                 )}
               </p>
               <Button
@@ -414,7 +414,7 @@ export default function DesignConfigurator({
                   })
                 }
               >
-                Continue <ArrowRight className="h-4 w-4 ml-1.5 inline" />
+                Continue <ArrowRight className="ml-1.5 inline h-4 w-4" />
               </Button>
             </div>
           </div>

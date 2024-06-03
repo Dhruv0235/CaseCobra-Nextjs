@@ -51,7 +51,7 @@ export default function AddressModal({
     <Dialog onOpenChange={setIsOpen} open={isOpen}>
       <DialogContent className="absolute z-[9999999]">
         <DialogHeader>
-          <div className="relative mx-auto w-24 h-24 mb-2">
+          <div className="relative mx-auto mb-2 h-24 w-24">
             <Image
               fill
               src="/snake-1.png"
@@ -59,7 +59,7 @@ export default function AddressModal({
               className="object-contain"
             />
           </div>
-          <DialogTitle className="text-3xl text-center font-bold tracking-tight text-gray-900">
+          <DialogTitle className="text-center text-3xl font-bold tracking-tight text-gray-900">
             Enter Your Shipping Address
           </DialogTitle>
 
@@ -106,7 +106,7 @@ export default function AddressModal({
           >
             {({ isSubmitting }) => (
               <Form>
-                <DialogDescription className="text-base py-2 grid grid-cols-10 gap-3">
+                <DialogDescription className="grid grid-cols-10 gap-3 py-2 text-base">
                   <div className="col-span-10">
                     <Label htmlFor="name">Name</Label>
                     <Field
@@ -224,7 +224,7 @@ export default function AddressModal({
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="text-primary-foreground shadow hover:bg-primary/90 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 h-9 px-4 py-2 bg-primary w-full"
+                      className="inline-flex h-9 w-full items-center justify-center whitespace-nowrap rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                     >
                       Save
                     </button>
