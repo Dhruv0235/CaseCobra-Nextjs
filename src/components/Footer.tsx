@@ -32,6 +32,9 @@ function Footer() {
               >
                 Cookie policy
               </Link>
+              <div className="text-sm text-muted-foreground hidden md:block pointer-events-none">
+                Created By Dhruv Kotadiya
+              </div>
             </div>
           </div>
         </div>
