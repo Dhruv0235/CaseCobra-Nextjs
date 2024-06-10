@@ -20,6 +20,8 @@ import { formatPrice } from "@/lib/utils";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { notFound } from "next/navigation";
 import StatusDropDown from "./StatusDropdown";
+import { getSalesCurrentYear } from "./actions";
+import WeeklyChart from "./WeeklyChart";
 
 const Page = async () => {
   const { getUser } = getKindeServerSession();
@@ -74,6 +76,9 @@ const Page = async () => {
   const WEEKLY_GOAL = 20000;
   const MONTHLY_GOAL = 80000;
 
+  const sales = await getSalesCurrentYear();
+  console.log("Sales are:", sales);
+
   return (
     <div className="flex min-h-screen w-full bg-muted/40">
       <div className="mx-auto flex w-full max-w-7xl flex-col sm:gap-4 sm:py-4">
@@ -117,6 +122,22 @@ const Page = async () => {
             </Card>
           </div>
 
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="flex flex-col gap-5">
+              <h1 className="text-4xl font-bold tracking-tight">
+                Weekly Sales
+              </h1>
+              <WeeklyChart data={sales.weeklySales} />
+            </div>
+
+            <div className="flex flex-col gap-5">
+              <h1 className="text-4xl font-bold tracking-tight">
+                Monthly Sales
+              </h1>
+              <WeeklyChart data={sales.monthlySales} />
+            </div>
+          </div>
+
           <h1 className="text-4xl font-bold tracking-tight">Incoming orders</h1>
 
           <Table>
@@ -155,6 +176,11 @@ const Page = async () => {
               ))}
             </TableBody>
           </Table>
+          {orders.length === 0 ? (
+            <h1 className="mb-10 text-center text-2xl text-red-500">
+              No orders were placed in last week
+            </h1>
+          ) : null}
         </div>
       </div>
     </div>
