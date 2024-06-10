@@ -55,6 +55,7 @@ export default function PhonePreview({
             caseBackgroundColor,
           )}
           src={croppedImageUrl}
+          alt="User Edited Image"
         />
       </div>
 

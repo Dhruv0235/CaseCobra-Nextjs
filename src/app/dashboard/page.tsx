@@ -20,8 +20,8 @@ import { formatPrice } from "@/lib/utils";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { notFound } from "next/navigation";
 import StatusDropDown from "./StatusDropdown";
-import { getSalesCurrentYear } from "./actions";
-import WeeklyChart from "./WeeklyChart";
+import { getSalesLast12Months } from "./actions";
+import Chart from "./Chart";
 
 const Page = async () => {
   const { getUser } = getKindeServerSession();
@@ -76,7 +76,7 @@ const Page = async () => {
   const WEEKLY_GOAL = 20000;
   const MONTHLY_GOAL = 80000;
 
-  const sales = await getSalesCurrentYear();
+  const sales = await getSalesLast12Months();
   console.log("Sales are:", sales);
 
   return (
@@ -127,14 +127,14 @@ const Page = async () => {
               <h1 className="text-4xl font-bold tracking-tight">
                 Weekly Sales
               </h1>
-              <WeeklyChart data={sales.weeklySales} />
+              <Chart data={sales.weeklySales} />
             </div>
 
             <div className="flex flex-col gap-5">
               <h1 className="text-4xl font-bold tracking-tight">
                 Monthly Sales
               </h1>
-              <WeeklyChart data={sales.monthlySales} />
+              <Chart data={sales.monthlySales} />
             </div>
           </div>
 

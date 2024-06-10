@@ -9,6 +9,7 @@ import {
   format,
   eachWeekOfInterval,
   eachMonthOfInterval,
+  subMonths,
 } from "date-fns";
 import { OrderStatus } from "@prisma/client";
 
@@ -29,12 +30,11 @@ export async function changeOrderStatus({
   });
 }
 
-export async function getSalesCurrentYear() {
+export async function getSalesLast12Months() {
   const now = new Date();
-  const startOfYear = new Date(now.getFullYear(), 0, 1);
-  const endOfYear = new Date(now.getFullYear(), 11, 31);
+  const startOfLast12Months = subMonths(now, 11); // Get the date 11 months before now
 
-  const months = eachMonthOfInterval({ start: startOfYear, end: endOfYear });
+  const months = eachMonthOfInterval({ start: startOfLast12Months, end: now });
   const monthlySales = await Promise.all(
     months.map(async (month) => {
       const start = startOfMonth(month);

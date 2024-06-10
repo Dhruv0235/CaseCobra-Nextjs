@@ -60,6 +60,7 @@ export default function Steps() {
                         "border-zinc-700": isCurrent,
                       },
                     )}
+                    alt={`Snake-Image-${i}`}
                   />
                 </span>
                 <span className="ml-4 mt-0.5 flex h-full min-w-0 flex-col justify-center">

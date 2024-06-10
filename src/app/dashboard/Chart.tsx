@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-export default function WeeklyChart({
+export default function Chart({
   data,
 }: {
   data: { week?: string; totalSales: number; month?: string }[];
@@ -28,7 +28,7 @@ export default function WeeklyChart({
           bottom: 5,
         }}
       >
-        <CartesianGrid strokeDasharray="4 4" />
+        <CartesianGrid strokeDasharray="3 3" />
         {data[0].week && <XAxis dataKey="week" />}
         {data[0].month && <XAxis dataKey="month" />}
         <YAxis />
