@@ -10,6 +10,7 @@ import {
   eachWeekOfInterval,
   eachMonthOfInterval,
   subMonths,
+  subWeeks,
 } from "date-fns";
 import { OrderStatus } from "@prisma/client";
 
@@ -55,13 +56,13 @@ export async function getSalesLast12Months() {
     }),
   );
 
-  // Get total sales for each week in the current month
-  const startOfCurrentMonth = startOfMonth(now);
-  const endOfCurrentMonth = endOfMonth(now);
+  // Get total sales for each week in the last 6 weeks including the current week
+  const startOfLast6Weeks = subWeeks(now, 5); // 5 weeks ago + current week = last 6 weeks
+  const endOfCurrentWeek = endOfWeek(now);
 
   const weeks = eachWeekOfInterval({
-    start: startOfCurrentMonth,
-    end: endOfCurrentMonth,
+    start: startOfLast6Weeks,
+    end: endOfCurrentWeek,
   });
   const weeklySales = await Promise.all(
     weeks.map(async (week) => {
