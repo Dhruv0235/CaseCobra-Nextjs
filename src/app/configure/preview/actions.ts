@@ -102,6 +102,7 @@ export const SendMail = async (orderId: string) => {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   if (!user || !user.email) {
+    console.log(user);
     throw new Error("You need to be logged in");
   }
 
