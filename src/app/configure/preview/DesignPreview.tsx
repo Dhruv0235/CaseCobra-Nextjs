@@ -11,7 +11,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Confetti from "react-dom-confetti";
-import { createOrderId, verifyOrder } from "./actions";
+import { createOrderId, SendMail, verifyOrder } from "./actions";
 
 import AddressModal from "@/components/AddressModal";
 import LoginModal from "@/components/LoginModal";
@@ -32,6 +32,7 @@ export default function DesignPreview({
   const [cookieValue, setCookieValue] = useState<any>();
   const [toggleCookie, setToggleCookie] = useState(false);
   const [loadingState, setLoadingState] = useState(false);
+  const [paymentInitiated, setPaymentInitiated] = useState(false);
 
   function toggle() {
     setToggleCookie(!toggleCookie);
@@ -50,7 +51,6 @@ export default function DesignPreview({
         const parsedValue = JSON.parse(cookieValue);
 
         setCookieValue(parsedValue);
-        console.log(parsedValue);
 
         if (parsedValue) {
           setAddressEntered(true);
@@ -80,6 +80,7 @@ export default function DesignPreview({
 
   const processPayment = async ({ configId }: { configId: string }) => {
     try {
+      setPaymentInitiated(true);
       const orderId = await createOrderId(configId);
       const options = {
         key: process.env.key_id,
@@ -98,11 +99,12 @@ export default function DesignPreview({
             orderIdDB: orderId.orderIdDB,
             cookieValue,
           };
-          console.log("Data is", data);
 
           const res = await verifyOrder(data);
 
           if (res.isOk) {
+            await SendMail(orderId.orderIdDB);
+            setPaymentInitiated(false);
             setLoadingState(true);
             setTimeout(() => {
               router.push(
@@ -116,26 +118,31 @@ export default function DesignPreview({
               variant: "default",
             });
           } else {
+            setPaymentInitiated(false);
             router.push(
               `${process.env.NEXT_PUBLIC_SERVER_URL}/configure/preview?id=${configuration.id}`,
             );
           }
+        },
+        modal: {
+          ondismiss: function () {
+            setPaymentInitiated(false);
+            toast({
+              title: "Payment Cancelled",
+              description: "You cancelled the payment process",
+              variant: "destructive",
+            });
+          },
         },
         theme: {
           color: "#16A34A",
         },
       };
       const paymentObject = new (window as any).Razorpay(options);
-      paymentObject.on("payment.failed", function (response: any) {
-        toast({
-          title: "Payment Failed",
-          description: "There was an issue on our side. Please try again",
-          variant: "destructive",
-        });
-      });
       paymentObject.open();
     } catch (error) {
       console.error(error);
+      setPaymentInitiated(false);
       toast({
         title: "Payment Failed",
         description: "There was an issue on our side. Please try again",
@@ -284,6 +291,9 @@ export default function DesignPreview({
                   <Button
                     className="px-4 sm:px-6 lg:px-8"
                     onClick={() => handleCheckOut()}
+                    isLoading={paymentInitiated}
+                    disabled={paymentInitiated}
+                    loadingText="Initiating Payment"
                   >
                     Check out <ArrowRight className="ml-1.5 inline h-4 w-4" />
                   </Button>
