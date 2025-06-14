@@ -83,7 +83,7 @@ export default function DesignPreview({
       setPaymentInitiated(true);
       const orderId = await createOrderId(configId);
       const options = {
-        key: process.env.key_id,
+        key: process.env.NEXT_PUBLIC_key_id,
         amount: orderId.price * 100,
         currency: "INR",
         name: "Case Cobra",
