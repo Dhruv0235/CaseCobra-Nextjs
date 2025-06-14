@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: "utfs.io",
         port: "",
       },
+      {
+        proocol: "https",
+        hostname: "4mrz4s25za.ufs.sh",
+        port: "",
+      },
     ],
   },
 };
