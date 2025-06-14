@@ -264,7 +264,7 @@ export default function Page() {
                   <Loader2 className="mb-4 h-8 w-8 animate-spin text-blue-600" />
                   <p className="text-sm text-gray-600">
                     {isUploading
-                      ? "Uploading selected image..."
+                      ? "Preparing selected image..."
                       : "Preparing image..."}
                   </p>
                   {isUploading && (
