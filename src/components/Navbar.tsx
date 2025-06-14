@@ -19,15 +19,15 @@ const Navbar = async () => {
           <div className="flex h-full items-center space-x-4">
             {user ? (
               <>
-                <Link
-                  href="/api/auth/logout"
-                  className={buttonVariants({
-                    size: "sm",
-                    variant: "ghost",
-                  })}
-                >
-                  Sign out
-                </Link>
+                <form action="/api/auth/logout" method="GET">
+                  <button
+                    type="submit"
+                    className={buttonVariants({ size: "sm", variant: "ghost" })}
+                  >
+                    Sign out
+                  </button>
+                </form>
+
                 {isAdmin ? (
                   <Link
                     href="/dashboard"
