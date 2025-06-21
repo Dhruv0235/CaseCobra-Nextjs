@@ -6,6 +6,8 @@ import type { Metadata } from "next";
 import { Recursive } from "next/font/google";
 import "./globals.css";
 import { constructMetadata } from "@/lib/utils";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Recursive({ subsets: ["latin"] });
 
@@ -27,6 +29,8 @@ export default function RootLayout({
           <Footer />
         </main>
         <Toaster />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
