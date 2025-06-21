@@ -275,18 +275,18 @@ export default function Page() {
         <Tabs defaultValue="upload" className="w-full">
           <TabsList className="mb-8 grid h-12 w-full grid-cols-3">
             <TabsTrigger value="upload" className="flex items-center gap-2">
-              <ImageIcon className="h-4 w-4" />
+              <ImageIcon className="hidden h-4 w-4 sm:block" />
               Upload Image
             </TabsTrigger>
             <TabsTrigger value="gallery" className="flex items-center gap-2">
-              <Palette className="h-4 w-4" />
+              <Palette className="hidden h-4 w-4 sm:block" />
               Gallery
             </TabsTrigger>
             <TabsTrigger
               value="ai-generate"
               className="flex items-center gap-2"
             >
-              <Sparkles className="h-4 w-4" />
+              <Sparkles className="hidden h-4 w-4 sm:block" />
               AI Generate
             </TabsTrigger>
           </TabsList>
@@ -589,7 +589,7 @@ export default function Page() {
                     <Button
                       onClick={handleUseGeneratedImage}
                       disabled={isUploadingGenerated || isUploading}
-                      className="h-12 flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 sm:max-w-xs"
+                      className="h-12 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 sm:max-w-xs"
                       size="lg"
                     >
                       {isUploadingGenerated || isUploading ? (
@@ -599,7 +599,7 @@ export default function Page() {
                         </>
                       ) : (
                         <>
-                          <Check className="mr-2 h-5 w-5" />
+                          <Check className="mr-2 h-4 w-4" />
                           Perfect! Use This Design
                         </>
                       )}
@@ -609,7 +609,7 @@ export default function Page() {
                       variant="outline"
                       onClick={handleDiscardGenerated}
                       disabled={isUploadingGenerated || isUploading}
-                      className="h-12 flex-1 border-2 hover:bg-gray-50 sm:max-w-xs"
+                      className="h-12 border-2 hover:bg-gray-50 sm:max-w-xs"
                       size="lg"
                     >
                       <RefreshCw className="mr-2 h-4 w-4" />
